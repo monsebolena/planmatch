@@ -1,0 +1,36 @@
+{% extends 'app1/base.html' %}
+{% block title %}Contacto{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="mb-3">Contáctame</h1>
+  <p>Rellena este formulario o escríbeme a <strong>pierinaagh7@gmail.com</strong></p>
+
+  {% if enviado %}
+  <div class="alert alert-success">✅ ¡Tu mensaje ha sido enviado con éxito!</div>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" name="nombre" id="nombre" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Correo</label>
+      <input type="email" class="form-control" name="email" id="email" required>
+    </div>
+    <div class="mb-3">
+      <label for="mensaje" class="form-label">Mensaje</label>
+      <textarea class="form-control" name="mensaje" id="mensaje" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+
+  <hr class="my-5">
+
+  <div class="text-center">
+    <p>O escríbeme directamente por WhatsApp:</p>
+    <a href="https://wa.me/34600111222" class="btn btn-success" target="_blank">📱 Enviar WhatsApp</a>
+  </div>
+</div>
+{% endblock %}

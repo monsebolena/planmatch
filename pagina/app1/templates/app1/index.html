@@ -1,142 +1,82 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends 'app1/base.html' %}
+{% block title %}Inicio - Entrenamiento Personal Online{% endblock %}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio Montse</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'app1/css/style.css' %}">
-</head>
+{% block content %}
+<div class="container text-center py-5">
 
-<body>
+    <!-- Hero principal -->
+    <h1 class="display-5 fw-bold text-teal">Transforma tu cuerpo desde casa</h1>
+    <p class="lead mt-3 mb-4">
+        Soy <strong>Pierina</strong>, entrenadora personal online. Ayudo a mujeres a recuperar su fuerza, su energía y
+        su bienestar con planes de entrenamiento 100% adaptados y realistas, estés donde estés.
+    </p>
+    <a href="{% url 'contacto' %}" class="btn btn-primary btn-lg me-3">Solicita tu asesoramiento</a>
+    <a href="{% url 'servicios' %}" class="btn btn-outline-secondary btn-lg">Ver planes disponibles</a>
 
-    <!-- Encabezado -->
-    <header>
-        <div class="container">
-            <h1>Hola, soy Montse 👩‍💻</h1>
-            <p>Desarrolladora web enfocada en construir sitios modernos, funcionales y con alma.</p>
-            <a href="#contacto" class="btn-contacto">📬 ¡Hablemos!</a>
-        </div>
-    </header>
+</div>
 
-    <!-- Navegación -->
-    <div class="container nav-fijo">
-        <nav>
-            <ul>
-                <li><a href="#quien-soy">¿Quién soy?</a></li>
-                <li><a href="#skills">Habilidades</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
+<!-- Beneficios rápidos -->
+<div class="row mt-5 text-center">
+    <div class="col-md-4 mb-3">
+        <h5>🎯 Planes hechos para ti</h5>
+        <p>Entrena según tu nivel, tus horarios y tus objetivos.</p>
     </div>
+    <div class="col-md-4 mb-3">
+        <h5>📩 Comunicación directa</h5>
+        <p>Habla conmigo por WhatsApp o email. Te acompaño en cada paso.</p>
+    </div>
+    <div class="col-md-4 mb-3">
+        <h5>🏋️‍♀️ Sin gimnasio, sin presión</h5>
+        <p>Solo tú, tu cuerpo y una guía clara. Desde casa.</p>
+    </div>
+</div>
 
-    <!-- ¿Quién soy? -->
-    <section id="quien-soy" class="intro">
-        <div class="container">
-            <h2>¿Quién soy?</h2>
-            <p>Soy desarrolladora web con una visión creativa y en constante evolución.
-            <p>Me apasiona fusionar diseño y funcionalidad para convertir ideas en experiencias digitales memorables.
-            </p>
-            <p>Me encanta aprender y mejorar cada día. Estoy aquí para ayudarte a hacer realidad tus proyectos
-                digitales.</p>
-        </div>
-    </section>
-
-    <!-- Habilidades -->
-    <section id="skills" class="container">
-        <h2>Habilidades</h2>
-        <ul class="skills-list">
-            <li>💻 HTML / CSS / JavaScript</li>
-            <li>⚙️ Python / Django</li>
-            <li>🎨 Figma / UI Design</li>
-            <li>🚀 Git / GitHub</li>
-        </ul>
-    </section>
-
-    <!-- Servicios -->
-    <section id="servicios" class="proyectos container">
-        <h2>Lo que puedo hacer por ti</h2>
-        <div class="proyectos-lista">
-            <div class="proyecto">
-                <h3>👩‍💻 Desarrollo Web</h3>
-                <p>Webs rápidas, seguras y adaptables a cualquier dispositivo.</p>
-            </div>
-            <div class="proyecto">
-                <h3>🎨 UI/UX Design</h3>
-                <p>Interfaces atractivas, modernas y pensadas para el usuario.</p>
-            </div>
-            <div class="proyecto">
-                <h3>⚙️ Lógica & Backend</h3>
-                <p>Automatización, formularios y sistemas con Django y Python.</p>
+<!-- Testimonios destacados -->
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Lo que dicen mis clientas</h3>
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <p class="card-text">"Gracias a Pierina entreno desde casa con constancia y sin agobios. Estoy más
+                        fuerte y segura que nunca."</p>
+                </div>
+                <div class="card-footer bg-white text-muted">
+                    <small>– María G., 36 años</small>
+                </div>
             </div>
         </div>
-    </section>
-
-    <!-- Proyectos -->
-    <!-- Proyectos -->
-    <section id="proyectos" class="proyectos">
-        <div class="container">
-            <h2>Mis Proyectos</h2>
-            <ul class="proyectos-lista">
-                <li class="proyecto">
-                    <h3><a href="{% url 'recetas_cocina' %}">Recetas Healthy</a></h3>
-                    <p>Plataforma culinaria enfocada en recetas saludables con buscador dinámico por ingrediente o tipo
-                        de plato. Desarrollado con <strong>Django</strong>, <strong>HTML/CSS</strong> y
-                        <strong>JavaScript</strong>. Ideal para quienes quieren comer rico y sano.</p>
-                </li>
-
-                <li class="proyecto">
-                    <h3><a href="{% url 'biblioteca_virtual' %}">Librería Virtual</a></h3>
-                    <p>Catálogo interactivo de libros y cómics descargables. Incluye modo oscuro, filtros por categoría
-                        y buscador en tiempo real. Proyecto desarrollado con <strong>HTML, CSS moderno y JS
-                            puro</strong>.</p>
-                </li>
-
-                <li class="proyecto">
-                    <h3><a href="{% url 'tarot' %}">Tarot Interactivo</a></h3>
-                    <p>Aplicación esotérica creada en <strong>JavaScript</strong> donde el usuario elige una temática y
-                        descubre su destino con una carta personalizada. Destaca por su interfaz visual envolvente y
-                        animaciones suaves.</p>
-                </li>
-
-                <li class="proyecto">
-                    <h3><a href="{% url 'peliculas_catalogo' %}">Catálogo de Películas</a></h3>
-                    <p>App estilo Netflix donde podés explorar películas por género, ver trailers y marcar favoritos.
-                        Construido con <strong>JS vanilla</strong> y una interfaz responsive. Incorpora sistema de
-                        puntuación y búsqueda avanzada.</p>
-                </li>
-
-                <li class="proyecto">
-                    <h3><a href="{% url 'videojuego' %}">Mini Juegos</a></h3>
-                    <p>Conjunto de juegos interactivos diseñados desde cero con <strong>JavaScript</strong>. Proyecto
-                        enfocado en lógica de programación, experiencia de usuario y animaciones. Ideal para demostrar
-                        habilidades front-end.</p>
-                </li>
-            </ul>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <p class="card-text">"Con sus rutinas y seguimiento, he conseguido mantenerme activa desde casa
+                        mientras cuido de mis hijos. ¡Una maravilla!"</p>
+                </div>
+                <div class="card-footer bg-white text-muted">
+                    <small>– Laura V., 42 años</small>
+                </div>
+            </div>
         </div>
-    </section>
-
-    <!-- Contacto (sin tocar como pediste) -->
-    <section id="contacto" class="contacto">
-        <div class="container">
-            <h2>Contacto</h2>
-            <p><strong>📞 Teléfono:</strong> +36 648614266</p>
-            <p><strong>📧 Email:</strong> <a href="mailto:soyunamelocoton@gmail.com">soyunamelocoton@gmail.com</a></p>
-            <p><strong>📍 Ubicación:</strong> Vigo, España</p>
-            <p><strong>⏰ Disponible:</strong> Lunes a Viernes de 9:00 a 18:00</p>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <p class="card-text">"Nunca me había sentido tan acompañada entrenando. Sus mensajes me motivan y
+                        sus rutinas son súper claras."</p>
+                </div>
+                <div class="card-footer bg-white text-muted">
+                    <small>– Carmen M., 29 años</small>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Montse Bolena. Todos los derechos reservados.</p>
-        </div>
-    </footer>
 
-</body>
+<!-- CTA final -->
+<div class="text-center mt-5">
+    <h4>¿Estás lista para tu cambio?</h4>
+    <p>Empieza hoy. Te acompaño en tu camino.</p>
+    <a href="{% url 'contacto' %}" class="btn btn-success btn-lg">Contactar ahora</a>
+</div>
 
-</html>
+{% endblock %}

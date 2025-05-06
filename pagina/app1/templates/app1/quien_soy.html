@@ -1,0 +1,43 @@
+{% extends 'app1/base.html' %}
+{% block title %}Quién Soy{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="mb-4">Quién Soy</h1>
+    <p class="lead">
+        Soy <strong>Pierina</strong>, entrenadora personal certificada con una visión integral del bienestar físico,
+        emocional y mental. Mi enfoque se basa en el progreso constante, la motivación realista y la conexión contigo y
+        tus objetivos.
+    </p>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="https://picsum.photos/400/300?random=2" class="card-img-top" alt="Pierina">
+                <div class="card-body text-start">
+                    <h3 class="card-title text-center">Pierina</h3>
+                    <p>Especialidades:</p>
+                    <ul class="list-unstyled ms-3">
+                        <li>✅ Entrenamientos dinámicos y desafiantes</li>
+                        <li>✅ Coaching motivacional y mentalidad positiva</li>
+                        <li>✅ Nutrición básica para acompañar el cambio físico</li>
+                        <li>✅ Programas adaptados para mujeres activas</li>
+                        <li>✅ Formación continua y cercanía real</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h4>¿Qué me diferencia?</h4>
+        <ul class="list-unstyled mt-3">
+            <li>🎯 Sesiones 100% personalizadas y centradas en ti</li>
+            <li>💬 Comunicación continua, por WhatsApp o email</li>
+            <li>🤸‍♀️ Energía positiva y disciplina combinadas</li>
+            <li>📚 Educación constante para darte lo mejor</li>
+        </ul>
+        <a href="{% url 'contacto' %}" class="btn btn-primary mt-4">Reserva tu primera sesión</a>
+    </div>
+</div>
+{% endblock %}

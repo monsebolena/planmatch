@@ -16,23 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app1 import views as view
-from django.conf import settings
-from django.conf.urls.static import static
 from app1 import views
 
 urlpatterns = [
-    path('', view.index, name='index'),
     path('admin/', admin.site.urls),
-    path('recetas/', view.recetas_cocina, name='recetas_cocina'),
-    path('peliculas/', view.peliculas_catalogo, name='peliculas_catalogo'),
-    path('proyecto/<int:id>/', view.detalle_proyecto, name='detalle_proyecto'),
-    path('videojuego/', view.videojuego_view, name='videojuego'),  # ✅ añadida esta línea
-    path('tarot/', view.tarot_view, name='tarot'),
-    path('biblioteca/', view.biblioteca_virtual, name='biblioteca_virtual'),
-
+    path('', views.index, name='inicio'),
+    path('el-centro/', views.el_centro, name='el_centro'),
+    path('quien-soy/', views.quien_soy, name='quien_soy'),
+    path('servicios/', views.servicios, name='servicios'),
+    path('contacto/', views.contacto, name='contacto'),
+    path('comprar/', views.comprar, name='comprar'),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

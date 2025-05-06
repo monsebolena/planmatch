@@ -1,0 +1,115 @@
+{% extends 'app1/base.html' %}
+{% block title %}Servicios{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Título principal -->
+    <h1 class="text-center mb-4" style="color: #007B8A;">Servicios de Asesoramiento Online</h1>
+    <p class="text-center lead">
+        Te acompaño en tu transformación física a través de planes 100% online. Tú entrenas desde casa a tu ritmo,
+        con rutinas personalizadas, seguimiento continuo y soporte directo.
+    </p>
+
+    <!-- Bloque de 3 servicios -->
+    <div class="row text-center mt-5">
+        <!-- Rutina personalizada -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="p-4 border rounded shadow-sm h-100">
+                <h5>📋 <strong>Rutina Personalizada</strong></h5>
+                <p>Diseñada exclusivamente para ti: tu nivel, tus objetivos y el tiempo que puedes dedicar.</p>
+                <ul class="list-unstyled text-start mt-3">
+                    <li>✅ Tabla mensual en PDF</li>
+                    <li>✅ Ejercicios explicados paso a paso</li>
+                    <li>✅ Acceso a vídeos</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Seguimiento y soporte -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="p-4 border rounded shadow-sm h-100">
+                <h5>💬 <strong>Seguimiento y Soporte</strong></h5>
+                <p>No estás sola. Tendrás contacto directo conmigo por WhatsApp o email para resolver dudas y adaptar tu
+                    rutina.</p>
+                <ul class="list-unstyled text-start mt-3">
+                    <li>✅ Revisión semanal de progreso</li>
+                    <li>✅ Ajustes mensuales en la rutina</li>
+                    <li>✅ Apoyo emocional y motivacional</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Plan nutricional -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="p-4 border rounded shadow-sm h-100">
+                <h5>🥗 <strong>Plan Nutricional</strong></h5>
+                <p>Incluye una guía alimentaria básica para acompañar tu entrenamiento y tus objetivos físicos.</p>
+                <ul class="list-unstyled text-start mt-3">
+                    <li>✅ Guía nutricional general o por objetivos</li>
+                    <li>✅ Enfoque saludable y flexible</li>
+                    <li>✅ Sin restricciones extremas</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Planes -->
+    <div class="my-5">
+        <h2 class="text-center mb-4">Elige tu plan de asesoramiento</h2>
+        <div class="row justify-content-center">
+
+            <!-- Plan mensual -->
+            <div class="col-md-5 mb-4">
+                <div class="card text-center h-100 shadow-sm border-dark">
+                    <div class="card-header bg-dark text-white">
+                        <h4>Asesoría Online Mensual</h4>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">70€/mes</h3>
+                        <ul class="list-unstyled mt-3 text-start">
+                            <li>• Estudio preliminar</li>
+                            <li>• Pautas dietéticas generales</li>
+                            <li>• Plan de entrenamiento mensual</li>
+                            <li>• Seguimiento semanal</li>
+                            <li>• Control de peso</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <a href="{% url 'contacto' %}" class="btn btn-success px-4 py-2">Contáctame</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan trimestral -->
+            <div class="col-md-5 mb-4">
+                <div class="card text-center h-100 shadow-sm border-dark">
+                    <div class="card-header bg-dark text-white">
+                        <h4>Asesoría Online Trimestral</h4>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">150€/trimestre</h3>
+                        <ul class="list-unstyled mt-3 text-start">
+                            <li>• Estudio más completo</li>
+                            <li>• Pautas dietéticas personalizadas</li>
+                            <li>• 3 rutinas: una por mes</li>
+                            <li>• Revisión quincenal + ajustes</li>
+                            <li>• Soporte motivacional continuo</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <a href="{% url 'contacto' %}" class="btn btn-success px-4 py-2">Contáctame</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-5">
+        <h4>¿Lista para dar el paso?</h4>
+        <p>No necesitas experiencia ni material. Solo compromiso. Yo me encargo del resto. 💪</p>
+        <a href="{% url 'contacto' %}" class="btn btn-primary btn-lg">Solicitar Asesoramiento</a>
+    </div>
+</div>
+{% endblock %}
