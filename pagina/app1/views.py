@@ -26,3 +26,5 @@ def tarot_view(request):
 
 def biblioteca_virtual(request):
     return render(request, "app1/biblioteca.html")
+
+
