@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Películas</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #1a1a1a;
+        }
+
+        header {
+            background: linear-gradient(90deg, #4e54c8, #8f94fb);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #e0e0ff;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .buscador {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .buscador input {
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid #6c63ff;
+            background: #ffffff;
+            color: #1a1a1a;
+            width: 90%;
+            max-width: 400px;
+            font-size: 1rem;
+        }
+
+        .generos {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .generos button {
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            margin: 5px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .generos button:hover {
+            background-color: #574b90;
+        }
+
+        .pelicula {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .pelicula:hover {
+            transform: translateY(-4px);
+        }
+
+        .pelicula h2 {
+            color: #4e54c8;
+            margin-top: 0;
+        }
+
+        .favorito {
+            color: #f39c12;
+            cursor: pointer;
+        }
+
+        .ver-mas {
+            color: #6c63ff;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .detalles {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        .estrellas span {
+            font-size: 1.2rem;
+            color: #ffd700;
+            cursor: pointer;
+        }
+
+        iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            border: none;
+            margin-top: 15px;
+        }
+
+        .volver {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .volver a {
+            padding: 12px 24px;
+            background-color: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            iframe {
+                height: 220px;
+            }
+
+            .pelicula h2 {
+                font-size: 1.3rem;
+            }
+
+            .ver-mas {
+                font-size: 1rem;
+            }
+
+            .estrellas span {
+                font-size: 1.1rem;
+            }
+
+            .generos button {
+                font-size: 0.95rem;
+                padding: 10px 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            iframe {
+                height: 220px;
+            }
+
+            .pelicula h2 {
+                font-size: 1.3rem;
+            }
+
+            .ver-mas {
+                font-size: 1rem;
+            }
+
+            .estrellas span {
+                font-size: 1.1rem;
+            }
+
+            .generos button {
+                font-size: 0.95rem;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Catálogo de Películas</h1>
+        <p>Explorá películas por género, mirá trailers y califícalas ⭐</p>
+    </header>
+
+    <div class="container">
+        <div class="buscador">
+            <input type="text" id="buscador" placeholder="Buscar por título o género...">
+        </div>
+
+        <div class="generos">
+            <button onclick="filtrarGenero('todos')">Todos</button>
+            <button onclick="filtrarGenero('accion')">Acción</button>
+            <button onclick="filtrarGenero('comedia')">Comedia</button>
+            <button onclick="filtrarGenero('drama')">Drama</button>
+        </div>
+
+        <!-- PELÍCULAS -->
+        <div class="pelicula" data-genero="accion" data-titulo="inception">
+            <h2>Inception <span onclick="toggleFavorito(this)">⭐</span></h2>
+            <p>Un ladrón que roba ideas es contratado para una misión única: implantar una.</p>
+            <div class="estrellas">
+                <strong>Valoración:</strong>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span><span
+                    onclick="calificar(this)">☆</span>
+            </div>
+            <div class="ver-mas" onclick="toggleDetalles(this)">Ver más ↓</div>
+            <div class="detalles">
+                <p><strong>Director:</strong> Christopher Nolan</p>
+                <p><strong>Año:</strong> 2010</p>
+                <p><strong>Duración:</strong> 2h 28m</p>
+                <iframe src="https://www.youtube.com/embed/YoHD9XEInc0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="pelicula" data-genero="comedia" data-titulo="superbad">
+            <h2>Superbad <span onclick="toggleFavorito(this)">⭐</span></h2>
+            <p>Dos adolescentes buscan una fiesta inolvidable antes de graduarse.</p>
+            <div class="estrellas">
+                <strong>Valoración:</strong>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span><span
+                    onclick="calificar(this)">☆</span>
+            </div>
+            <div class="ver-mas" onclick="toggleDetalles(this)">Ver más ↓</div>
+            <div class="detalles">
+                <p><strong>Director:</strong> Greg Mottola</p>
+                <p><strong>Año:</strong> 2007</p>
+                <p><strong>Duración:</strong> 1h 53m</p>
+                <iframe src="https://www.youtube.com/embed/4eaZ_48ZYog" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="pelicula" data-genero="drama" data-titulo="forrest gump">
+            <h2>Forrest Gump <span onclick="toggleFavorito(this)">⭐</span></h2>
+            <p>Un hombre extraordinario vive momentos históricos sin saberlo.</p>
+            <div class="estrellas">
+                <strong>Valoración:</strong>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span><span
+                    onclick="calificar(this)">☆</span>
+            </div>
+            <div class="ver-mas" onclick="toggleDetalles(this)">Ver más ↓</div>
+            <div class="detalles">
+                <p><strong>Director:</strong> Robert Zemeckis</p>
+                <p><strong>Año:</strong> 1994</p>
+                <p><strong>Duración:</strong> 2h 22m</p>
+                <iframe src="https://www.youtube.com/embed/bLvqoHBptjg" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="pelicula" data-genero="accion" data-titulo="mad max fury road">
+            <h2>Mad Max: Fury Road <span onclick="toggleFavorito(this)">⭐</span></h2>
+            <p>En un futuro desértico, Max se une a una rebelde para escapar de un tirano.</p>
+            <div class="estrellas">
+                <strong>Valoración:</strong>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span><span
+                    onclick="calificar(this)">☆</span>
+            </div>
+            <div class="ver-mas" onclick="toggleDetalles(this)">Ver más ↓</div>
+            <div class="detalles">
+                <p><strong>Director:</strong> George Miller</p>
+                <p><strong>Año:</strong> 2015</p>
+                <p><strong>Duración:</strong> 2h</p>
+                <iframe src="https://www.youtube.com/embed/hEJnMQG9ev8" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- COMEDIA EXTRA -->
+        <div class="pelicula" data-genero="comedia" data-titulo="the mask">
+            <h2>The Mask <span onclick="toggleFavorito(this)">⭐</span></h2>
+            <p>Un hombre tímido encuentra una máscara mágica que lo convierte en un loco carismático.</p>
+            <div class="estrellas">
+                <strong>Valoración:</strong>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span><span
+                    onclick="calificar(this)">☆</span>
+            </div>
+            <div class="ver-mas" onclick="toggleDetalles(this)">Ver más ↓</div>
+            <div class="detalles">
+                <p><strong>Director:</strong> Chuck Russell</p>
+                <p><strong>Año:</strong> 1994</p>
+                <p><strong>Duración:</strong> 1h 41m</p>
+                <iframe src="https://www.youtube.com/embed/hOqVRwGVUkA" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- DRAMA EXTRA -->
+        <div class="pelicula" data-genero="drama" data-titulo="the pursuit of happyness">
+            <h2>The Pursuit of Happyness <span onclick="toggleFavorito(this)">⭐</span></h2>
+            <p>Un padre lucha contra la adversidad para mejorar la vida de su hijo.</p>
+            <div class="estrellas">
+                <strong>Valoración:</strong>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span>
+                <span onclick="calificar(this)">☆</span><span onclick="calificar(this)">☆</span><span
+                    onclick="calificar(this)">☆</span>
+            </div>
+            <div class="ver-mas" onclick="toggleDetalles(this)">Ver más ↓</div>
+            <div class="detalles">
+                <p><strong>Director:</strong> Gabriele Muccino</p>
+                <p><strong>Año:</strong> 2006</p>
+                <p><strong>Duración:</strong> 1h 57m</p>
+                <iframe src="https://www.youtube.com/embed/89Kq8SDyvfg" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="volver">
+            <a href="{% url 'index' %}">← Volver al inicio</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleDetalles(btn) {
+            const detalles = btn.nextElementSibling;
+            const visible = detalles.style.display === 'block';
+            detalles.style.display = visible ? 'none' : 'block';
+            btn.textContent = visible ? 'Ver más ↓' : 'Ocultar ↑';
+        }
+
+        function toggleFavorito(span) {
+            span.textContent = span.textContent === '⭐' ? '✩' : '⭐';
+        }
+
+        function calificar(span) {
+            const estrellas = span.parentElement.querySelectorAll('span');
+            const index = Array.from(estrellas).indexOf(span);
+            estrellas.forEach((s, i) => {
+                s.textContent = i <= index ? '★' : '☆';
+            });
+        }
+
+        function filtrarGenero(gen) {
+            document.querySelectorAll('.pelicula').forEach(p => {
+                p.style.display = (gen === 'todos' || p.dataset.genero === gen) ? 'block' : 'none';
+            });
+        }
+
+        document.getElementById('buscador').addEventListener('input', function () {
+            const texto = this.value.toLowerCase();
+            document.querySelectorAll('.pelicula').forEach(p => {
+                const titulo = p.dataset.titulo;
+                const genero = p.dataset.genero;
+                p.style.display = (titulo.includes(texto) || genero.includes(texto)) ? 'block' : 'none';
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Juegos Creativos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 2.2rem;
+    }
+
+    .menu-juegos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    .juego {
+      background: #ffffffdd;
+      border-radius: 12px;
+      padding: 1.5rem;
+      max-width: 320px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .juego:hover {
+      transform: translateY(-5px);
+    }
+
+    .juego h2 {
+      color: #2980b9;
+      margin-bottom: 1rem;
+    }
+
+    .zona-juego {
+      margin-top: 1rem;
+    }
+
+    button {
+      background: #e67e22;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #d35400;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 70%;
+      margin-top: 0.5rem;
+    }
+
+    .tablero {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      gap: 6px;
+      justify-content: center;
+      margin: 1rem auto;
+    }
+
+    .celda {
+      width: 80px;
+      height: 80px;
+      background: #ecf0f1;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .volver {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .volver a {
+      text-decoration: none;
+      background: #2c3e50;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .volver a:hover {
+      background: #34495e;
+    }
+
+    @media (max-width: 600px) {
+      .tablero {
+        grid-template-columns: repeat(3, 60px);
+      }
+      .celda {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 Mini Juegos Creativos</h1>
+
+  <div class="menu-juegos">
+
+    <!-- Tres en Raya -->
+    <div class="juego">
+      <h2>⭕ Tres en Raya ❌</h2>
+      <div class="zona-juego">
+        <div class="tablero" id="tablero"></div>
+        <p id="resultado"></p>
+        <button onclick="reiniciarTicTacToe()" aria-label="Reiniciar juego de tres en raya">Reiniciar</button>
+      </div>
+    </div>
+
+    <!-- Adivina el número -->
+    <div class="juego">
+      <h2>🔢 Adivina el Número</h2>
+      <div class="zona-juego">
+        <p>Estoy pensando en un número del 1 al 10</p>
+        <input type="number" id="adivina" min="1" max="10" aria-label="Número a adivinar" />
+        <br>
+        <button onclick="verificarAdivina()" aria-label="Verificar número">Probar</button>
+        <p id="mensaje"></p>
+      </div>
+    </div>
+
+    <!-- Memoria Rápida -->
+    <div class="juego">
+      <h2>🧠 Memoria Rápida</h2>
+      <div class="zona-juego">
+        <button onclick="generarSecuencia()" aria-label="Mostrar secuencia">Mostrar Secuencia</button>
+        <p class="secuencia" id="secuencia"></p>
+        <input type="text" id="respuestaMemoria" placeholder="Repite la secuencia" aria-label="Repetir secuencia" />
+        <br>
+        <button onclick="verificarMemoria()" aria-label="Verificar secuencia">Verificar</button>
+        <p id="resultadoMemoria"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="volver">
+    <a href="{% url 'index' %}">← Volver al inicio</a>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Tres en Raya
+      const tablero = document.getElementById("tablero");
+      let turno = "X";
+      let celdas = [];
+
+      function crearTablero() {
+        tablero.innerHTML = "";
+        celdas = [];
+        for (let i = 0; i < 9; i++) {
+          const celda = document.createElement("div");
+          celda.classList.add("celda");
+          celda.addEventListener("click", () => marcar(celda));
+          tablero.appendChild(celda);
+          celdas.push(celda);
+        }
+      }
+
+      function marcar(celda) {
+        if (celda.textContent === "") {
+          celda.textContent = turno;
+          verificarGanador();
+          turno = turno === "X" ? "O" : "X";
+        }
+      }
+
+      function verificarGanador() {
+        const combos = [
+          [0,1,2],[3,4,5],[6,7,8],
+          [0,3,6],[1,4,7],[2,5,8],
+          [0,4,8],[2,4,6]
+        ];
+        for (let [a, b, c] of combos) {
+          if (
+            celdas[a].textContent &&
+            celdas[a].textContent === celdas[b].textContent &&
+            celdas[b].textContent === celdas[c].textContent
+          ) {
+            document.getElementById("resultado").textContent = `Ganó ${celdas[a].textContent}`;
+            return;
+          }
+        }
+      }
+
+      window.reiniciarTicTacToe = () => {
+        crearTablero();
+        document.getElementById("resultado").textContent = "";
+        turno = "X";
+      };
+
+      crearTablero();
+
+      // Adivina el número
+      const secreto = Math.floor(Math.random() * 10) + 1;
+      window.verificarAdivina = () => {
+        const valor = parseInt(document.getElementById("adivina").value);
+        const mensaje = document.getElementById("mensaje");
+        if (valor === secreto) {
+          mensaje.textContent = "🎉 ¡Correcto!";
+        } else {
+          mensaje.textContent = "❌ Intenta de nuevo.";
+        }
+      };
+
+      // Memoria Rápida
+      let secuenciaActual = "";
+      window.generarSecuencia = () => {
+        secuenciaActual = "";
+        for (let i = 0; i < 4; i++) {
+          secuenciaActual += Math.floor(Math.random() * 10);
+        }
+        const sec = document.getElementById("secuencia");
+        sec.textContent = secuenciaActual;
+        setTimeout(() => sec.textContent = "🔒 Oculto", 1500);
+      };
+
+      window.verificarMemoria = () => {
+        const entrada = document.getElementById("respuestaMemoria").value;
+        const res = document.getElementById("resultadoMemoria");
+        res.textContent = entrada === secuenciaActual
+          ? "✅ ¡Correcto!"
+          : "❌ Esa no era la secuencia.";
+      };
+    });
+  </script>
+</body>
+</html>

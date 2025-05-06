@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarot Interactivo</title>
+    <style>
+        body {
+            background: linear-gradient(180deg, #0b0f1a, #1a102a);
+            color: #e5e7eb;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            background: radial-gradient(circle, #250a3a, #0b0f1a);
+            text-align: center;
+            padding: 60px 20px;
+            color: #ff69e0;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #ffc5ee;
+        }
+
+        .pregunta {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 1rem;
+            margin: 10px;
+            border-radius: 12px;
+            background: #1e2130;
+            color: #fff;
+            border: 2px solid #ff69e0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff00c8;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 0 10px rgba(255, 0, 200, 0.2);
+        }
+
+        button:hover {
+            background-color: #e600aa;
+        }
+
+        .carta {
+            background: #1e2130;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 0 20px rgba(255, 0, 200, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .carta:hover {
+            transform: translateY(-6px);
+        }
+
+        .carta h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: #ff84d9;
+        }
+
+        .carta .emoji {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .carta p {
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .volver {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .volver a {
+            background: #ff00c8;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 0, 200, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🔮 Tarot Interactivo</h1>
+        <p>Elije un tema y descubre tu carta del destino</p>
+    </header>
+
+    <main class="container">
+        <div class="pregunta">
+            <label for="tema">¿Sobre qué quieres preguntar?</label><br />
+            <select id="tema">
+                <option value="">-- Elije un tema --</option>
+                <option value="amor">❤️ Amor</option>
+                <option value="trabajo">💼 Trabajo</option>
+                <option value="dinero">💰 Dinero</option>
+            </select><br />
+            <button onclick="tirarCarta()">Ver mi carta</button>
+        </div>
+
+        <section class="tirada">
+            <div id="cartas"></div>
+        </section>
+
+        <div class="volver">
+            <a href="{% url 'index' %}">← Volver al inicio</a>
+        </div>
+
+    </main>
+
+    <script>
+        const mazo = [
+            {
+                nombre: "El Loco",
+                emoji: "🎭",
+                descripcion: "Representa un nuevo comienzo, espontaneidad y libertad.",
+                consejo: "Atrévete a lo desconocido sin miedo.",
+                significados: {
+                    amor: "Relaciones inesperadas, pero emocionantes.",
+                    trabajo: "Momento de tomar riesgos creativos.",
+                    dinero: "Atención con decisiones impulsivas."
+                }
+            },
+            {
+                nombre: "El Mago",
+                emoji: "🪄",
+                descripcion: "Simboliza poder personal, habilidad y acción.",
+                consejo: "Tienes las herramientas, ¡úsalas sabiamente!",
+                significados: {
+                    amor: "Encanto y atracción en juego.",
+                    trabajo: "Confía en tus talentos.",
+                    dinero: "Buena oportunidad si actúas ahora."
+                }
+            },
+            {
+                nombre: "La Sacerdotisa",
+                emoji: "📜",
+                descripcion: "Conexión con lo oculto, intuición y misterio.",
+                consejo: "Escucha tu voz interior.",
+                significados: {
+                    amor: "Relación profunda o secreta.",
+                    trabajo: "Observa más, actúa menos.",
+                    dinero: "No compartas tus planes aún."
+                }
+            },
+            {
+                nombre: "La Emperatriz",
+                emoji: "👑",
+                descripcion: "Abundancia, creatividad y fertilidad.",
+                consejo: "Nutre tus ideas como semillas.",
+                significados: {
+                    amor: "Amor en expansión y cuidado.",
+                    trabajo: "Creatividad fértil, nuevos proyectos.",
+                    dinero: "Flujo positivo y abundancia."
+                }
+            },
+            {
+                nombre: "El Emperador",
+                emoji: "🛡️",
+                descripcion: "Control, estructura y liderazgo.",
+                consejo: "Sé firme en tus decisiones.",
+                significados: {
+                    amor: "Relación estable o autoritaria.",
+                    trabajo: "Orden y estrategia traen éxito.",
+                    dinero: "Sé responsable con tus finanzas."
+                }
+            },
+            {
+                nombre: "El Hierofante",
+                emoji: "🙏",
+                descripcion: "Tradición, normas y espiritualidad.",
+                consejo: "Busca consejo sabio o ancestral.",
+                significados: {
+                    amor: "Compromisos serios.",
+                    trabajo: "Sigue reglas establecidas.",
+                    dinero: "Actúa con ética y paciencia."
+                }
+            },
+            {
+                nombre: "Los Enamorados",
+                emoji: "💞",
+                descripcion: "Dualidad, decisiones y vínculos profundos.",
+                consejo: "Actúa desde el corazón.",
+                significados: {
+                    amor: "Unión intensa o elección amorosa.",
+                    trabajo: "Elige tu camino con pasión.",
+                    dinero: "Comparte y equilibra tus recursos."
+                }
+            },
+            {
+                nombre: "El Carro",
+                emoji: "🚗",
+                descripcion: "Voluntad, movimiento y conquista.",
+                consejo: "Toma el control con confianza.",
+                significados: {
+                    amor: "Relación a distancia o avance rápido.",
+                    trabajo: "Éxito tras esfuerzo.",
+                    dinero: "Gastos en viajes o vehículos."
+                }
+            },
+            {
+                nombre: "La Justicia",
+                emoji: "⚖️",
+                descripcion: "Equilibrio, ley y consecuencias.",
+                consejo: "Actúa con honestidad y claridad.",
+                significados: {
+                    amor: "Decisiones justas y necesarias.",
+                    trabajo: "Momento de rendir cuentas.",
+                    dinero: "Ajusta cuentas pendientes."
+                }
+            },
+            {
+                nombre: "El Ermitaño",
+                emoji: "🕯️",
+                descripcion: "Soledad sabia, introspección y guía interior.",
+                consejo: "Tómate un tiempo para ti.",
+                significados: {
+                    amor: "Distanciamiento necesario.",
+                    trabajo: "Reflexión antes de actuar.",
+                    dinero: "Cuida tus recursos en silencio."
+                }
+            },
+            {
+                nombre: "La Rueda de la Fortuna",
+                emoji: "🎡",
+                descripcion: "Destino, ciclos y cambios inesperados.",
+                consejo: "Acepta el giro del destino.",
+                significados: {
+                    amor: "Nuevas oportunidades.",
+                    trabajo: "Cambio de rumbo positivo.",
+                    dinero: "Suerte inesperada."
+                }
+            },
+            {
+                nombre: "La Fuerza",
+                emoji: "🦁",
+                descripcion: "Dominio interior, paciencia y valor.",
+                consejo: "La suavidad vence al caos.",
+                significados: {
+                    amor: "Pasión y autocontrol.",
+                    trabajo: "Resistencia frente a retos.",
+                    dinero: "Sé constante, pero no agresivo."
+                }
+            },
+            {
+                nombre: "El Diablo",
+                emoji: "😈",
+                descripcion: "Ataduras, deseos y excesos.",
+                consejo: "Rompe los lazos que te limitan.",
+                significados: {
+                    amor: "Relaciones tóxicas o pasionales.",
+                    trabajo: "Ataduras laborales.",
+                    dinero: "Gastos compulsivos o deudas."
+                }
+            },
+            {
+                nombre: "La Torre",
+                emoji: "⚡",
+                descripcion: "Ruptura, liberación y transformación.",
+                consejo: "Lo que cae te libera.",
+                significados: {
+                    amor: "Cambio drástico o ruptura.",
+                    trabajo: "Fin repentino, reinvención.",
+                    dinero: "Reorganización brusca."
+                }
+            },
+            {
+                nombre: "La Estrella",
+                emoji: "🌟",
+                descripcion: "Esperanza, fe y guía espiritual.",
+                consejo: "Cree en lo que viene.",
+                significados: {
+                    amor: "Renacimiento emocional.",
+                    trabajo: "Inspiración y claridad.",
+                    dinero: "Buenas noticias en camino."
+                }
+            }
+        ];
+
+        function tirarCarta() {
+            const tema = document.getElementById('tema').value;
+            const contenedor = document.getElementById('cartas');
+            contenedor.innerHTML = "";
+
+            if (!tema) {
+                alert("Elegí un tema antes de tirar la carta.");
+                return;
+            }
+
+            const carta = mazo[Math.floor(Math.random() * mazo.length)];
+
+            const div = document.createElement('div');
+            div.className = "carta";
+            div.innerHTML = `
+                <span class="emoji">${carta.emoji}</span>
+                <h3>${carta.nombre}</h3>
+                <p><strong>Significado en ${tema}:</strong> ${carta.significados[tema]}</p>
+                <p><strong>Descripción:</strong> ${carta.descripcion}</p>
+                <p><strong>Consejo:</strong> ${carta.consejo}</p>
+            `;
+            contenedor.appendChild(div);
+        }
+    </script>
+
+</body>
+
+</html>

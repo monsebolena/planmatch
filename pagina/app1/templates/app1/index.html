@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Montse</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app1/css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <div class="container">
+            <h1>Hola, soy Montse 👩‍💻</h1>
+            <p>Desarrolladora web enfocada en construir sitios modernos, funcionales y con alma.</p>
+            <a href="#contacto" class="btn-contacto">📬 ¡Hablemos!</a>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <div class="container nav-fijo">
+        <nav>
+            <ul>
+                <li><a href="#quien-soy">¿Quién soy?</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ¿Quién soy? -->
+    <section id="quien-soy" class="intro">
+        <div class="container">
+            <h2>¿Quién soy?</h2>
+            <p>Soy desarrolladora web con una visión creativa y en constante evolución.
+            <p>Me apasiona fusionar diseño y funcionalidad para convertir ideas en experiencias digitales memorables.
+            </p>
+            <p>Me encanta aprender y mejorar cada día. Estoy aquí para ayudarte a hacer realidad tus proyectos
+                digitales.</p>
+        </div>
+    </section>
+
+    <!-- Habilidades -->
+    <section id="skills" class="container">
+        <h2>Habilidades</h2>
+        <ul class="skills-list">
+            <li>💻 HTML / CSS / JavaScript</li>
+            <li>⚙️ Python / Django</li>
+            <li>🎨 Figma / UI Design</li>
+            <li>🚀 Git / GitHub</li>
+        </ul>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="proyectos container">
+        <h2>Lo que puedo hacer por ti</h2>
+        <div class="proyectos-lista">
+            <div class="proyecto">
+                <h3>👩‍💻 Desarrollo Web</h3>
+                <p>Webs rápidas, seguras y adaptables a cualquier dispositivo.</p>
+            </div>
+            <div class="proyecto">
+                <h3>🎨 UI/UX Design</h3>
+                <p>Interfaces atractivas, modernas y pensadas para el usuario.</p>
+            </div>
+            <div class="proyecto">
+                <h3>⚙️ Lógica & Backend</h3>
+                <p>Automatización, formularios y sistemas con Django y Python.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <!-- Proyectos -->
+    <section id="proyectos" class="proyectos">
+        <div class="container">
+            <h2>Mis Proyectos</h2>
+            <ul class="proyectos-lista">
+                <li class="proyecto">
+                    <h3><a href="{% url 'recetas_cocina' %}">Recetas Healthy</a></h3>
+                    <p>Plataforma culinaria enfocada en recetas saludables con buscador dinámico por ingrediente o tipo
+                        de plato. Desarrollado con <strong>Django</strong>, <strong>HTML/CSS</strong> y
+                        <strong>JavaScript</strong>. Ideal para quienes quieren comer rico y sano.</p>
+                </li>
+
+                <li class="proyecto">
+                    <h3><a href="{% url 'biblioteca_virtual' %}">Librería Virtual</a></h3>
+                    <p>Catálogo interactivo de libros y cómics descargables. Incluye modo oscuro, filtros por categoría
+                        y buscador en tiempo real. Proyecto desarrollado con <strong>HTML, CSS moderno y JS
+                            puro</strong>.</p>
+                </li>
+
+                <li class="proyecto">
+                    <h3><a href="{% url 'tarot' %}">Tarot Interactivo</a></h3>
+                    <p>Aplicación esotérica creada en <strong>JavaScript</strong> donde el usuario elige una temática y
+                        descubre su destino con una carta personalizada. Destaca por su interfaz visual envolvente y
+                        animaciones suaves.</p>
+                </li>
+
+                <li class="proyecto">
+                    <h3><a href="{% url 'peliculas_catalogo' %}">Catálogo de Películas</a></h3>
+                    <p>App estilo Netflix donde podés explorar películas por género, ver trailers y marcar favoritos.
+                        Construido con <strong>JS vanilla</strong> y una interfaz responsive. Incorpora sistema de
+                        puntuación y búsqueda avanzada.</p>
+                </li>
+
+                <li class="proyecto">
+                    <h3><a href="{% url 'videojuego' %}">Mini Juegos</a></h3>
+                    <p>Conjunto de juegos interactivos diseñados desde cero con <strong>JavaScript</strong>. Proyecto
+                        enfocado en lógica de programación, experiencia de usuario y animaciones. Ideal para demostrar
+                        habilidades front-end.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contacto (sin tocar como pediste) -->
+    <section id="contacto" class="contacto">
+        <div class="container">
+            <h2>Contacto</h2>
+            <p><strong>📞 Teléfono:</strong> +36 648614266</p>
+            <p><strong>📧 Email:</strong> <a href="mailto:soyunamelocoton@gmail.com">soyunamelocoton@gmail.com</a></p>
+            <p><strong>📍 Ubicación:</strong> Vigo, España</p>
+            <p><strong>⏰ Disponible:</strong> Lunes a Viernes de 9:00 a 18:00</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Montse Bolena. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

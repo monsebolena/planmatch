@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biblioteca Virtual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg-light: #fffaf3;
+            --bg-dark: #1f1f1f;
+            --text-light: #2e2e2e;
+            --text-dark: #f5f5f5;
+            --primary: #b5ead7;
+            --secondary: #ffdac1;
+            --accent: #c7ceea;
+            --card-light: #ffffff;
+            --card-dark: #2d2d2d;
+        }
+
+        [data-theme="dark"] {
+            --bg-light: #1f1f1f;
+            --text-light: #f5f5f5;
+            --card-light: #2d2d2d;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .volver {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .volver a {
+            background-color: var(--accent);
+            color: #333;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1rem;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .volver a:hover {
+            background-color: #b4b8ea;
+        }
+
+
+        header {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            padding: 40px 20px;
+            text-align: center;
+            color: #333;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .modo-oscuro-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            color: #333;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .buscador input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .filtros {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .filtros button {
+            background-color: var(--secondary);
+            color: #333;
+            border: none;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .libro-card {
+            background-color: var(--card-light);
+            border-radius: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .libro-icono {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .libro-info h3 {
+            margin: 0;
+            color: var(--primary);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .libro-info p {
+            margin: 6px 0;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .boton-descarga {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        .boton-descarga:hover {
+            background-color: #98dbc6;
+        }
+
+        .libro-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .boton-descarga {
+            align-self: center;
+            text-align: center;
+            width: fit-content;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>📚 Librería Virtual</h1>
+        <p>Descargá libros y cómics reales de forma gratuita y legal 📥✨</p>
+        <button class="modo-oscuro-btn" onclick="toggleModoOscuro()">🌙 Modo oscuro</button>
+    </header>
+
+    <div class="container">
+        <div class="buscador" style="text-align:center;">
+            <input type="text" id="buscador" placeholder="Buscar por título o género...">
+        </div>
+
+        <div class="filtros">
+            <button onclick="filtrarGenero('todos')">Todos</button>
+            <button onclick="filtrarGenero('libro')">📘 Libros</button>
+            <button onclick="filtrarGenero('comic')">🦇 Cómics</button>
+        </div>
+
+        <div class="grid">
+
+            <!-- Libro 1 -->
+            <div class="libro-card" data-genero="libro" data-titulo="don quijote">
+                <div class="libro-icono">🐴</div>
+                <div class="libro-info">
+                    <h3>Don Quijote de la Mancha</h3>
+                    <p><strong>Autor:</strong> Miguel de Cervantes</p>
+                    <p><strong>Año:</strong> 1605</p>
+                    <p><strong>Género:</strong> Libro</p>
+                    <a class="boton-descarga" href="https://cvc.cervantes.es/literatura/lee/coleccion/pdf/quijote.pdf"
+                        target="_blank">📥 Descargar PDF</a>
+                </div>
+            </div>
+
+            <!-- Libro 2 -->
+            <div class="libro-card" data-genero="libro" data-titulo="divina comedia">
+                <div class="libro-icono">🔥</div>
+                <div class="libro-info">
+                    <h3>La Divina Comedia</h3>
+                    <p><strong>Autor:</strong> Dante Alighieri</p>
+                    <p><strong>Año:</strong> 1320</p>
+                    <p><strong>Género:</strong> Libro</p>
+                    <a class="boton-descarga"
+                        href="https://web.seducoahuila.gob.mx/biblioweb/upload/Dante%20Alighieri%20Divina%20comedia.pdf"
+                        target="_blank">📥
+                        Descargar PDF</a>
+                </div>
+            </div>
+
+            <!-- Libro 3 -->
+            <div class="libro-card" data-genero="libro" data-titulo="orgullo y prejuicio">
+                <div class="libro-icono">🌸</div>
+                <div class="libro-info">
+                    <h3>Orgullo y Prejuicio</h3>
+                    <p><strong>Autora:</strong> Jane Austen</p>
+                    <p><strong>Año:</strong> 1813</p>
+                    <p><strong>Género:</strong> Libro</p>
+                    <a class="boton-descarga"
+                        href="https://web.seducoahuila.gob.mx/biblioweb/upload/orgullo_y_prejuicio.pdf"
+                        target="_blank">📥 Descargar PDF</a>
+                </div>
+            </div>
+
+            <!-- Cómic 1 -->
+            <div class="libro-card" data-genero="comic" data-titulo="asterix el galo">
+                <div class="libro-icono">🛡️</div>
+                <div class="libro-info">
+                    <h3>Asterix el Galo</h3>
+                    <p><strong>Autores:</strong> Goscinny & Uderzo</p>
+                    <p><strong>Año:</strong> 1959</p>
+                    <p><strong>Género:</strong> Cómic</p>
+                    <a class="boton-descarga"
+                        href="https://www.edu.xunta.gal/centros/ceipbenchosey/system/files/Asterix%20el%20Galo.pdf"
+                        target="_blank">📥
+                        Descargar PDF</a>
+                </div>
+            </div>
+
+            <!-- Cómic 2 -->
+            <div class="libro-card" data-genero="comic" data-titulo="batman año uno">
+                <div class="libro-icono">🦇</div>
+                <div class="libro-info">
+                    <h3>Batman: Año Uno</h3>
+                    <p><strong>Autor:</strong> Frank Miller</p>
+                    <p><strong>Año:</strong> 1987</p>
+                    <p><strong>Género:</strong> Cómic</p>
+                    <a class="boton-descarga"
+                        href="https://es.scribd.com/document/393376238/Frank-Miller-Batman-ano-uno-pdf"
+                        target="_blank">📥
+                        Descargar PDF</a>
+                </div>
+            </div>
+
+            <!-- Libro 4 -->
+            <div class="libro-card" data-genero="libro" data-titulo="el principito">
+                <div class="libro-icono">🌟</div>
+                <div class="libro-info">
+                    <h3>El Principito</h3>
+                    <p><strong>Autor:</strong> Antoine de Saint-Exupéry</p>
+                    <p><strong>Año:</strong> 1943</p>
+                    <p><strong>Género:</strong> Libro</p>
+                    <a class="boton-descarga"
+                        href="https://web.seducoahuila.gob.mx/biblioweb/upload/el%20principito.pdf" target="_blank">📥
+                        Descargar PDF</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="volver">
+        <a href="{% url 'index' %}">← Volver al inicio</a>
+    </div>
+
+    <script>
+        function toggleModoOscuro() {
+            const root = document.documentElement;
+            const current = root.getAttribute('data-theme');
+            root.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+        }
+
+        function filtrarGenero(genero) {
+            document.querySelectorAll('.libro-card').forEach(card => {
+                card.style.display = (genero === 'todos' || card.dataset.genero === genero) ? 'flex' : 'none';
+            });
+        }
+
+        document.getElementById('buscador').addEventListener('input', function () {
+            const texto = this.value.toLowerCase();
+            document.querySelectorAll('.libro-card').forEach(card => {
+                const titulo = card.dataset.titulo.toLowerCase();
+                const genero = card.dataset.genero.toLowerCase();
+                card.style.display = (titulo.includes(texto) || genero.includes(texto)) ? 'flex' : 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>

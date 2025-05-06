@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recetas Healthy</title>
+    <style>
+        :root {
+            --bg-color: #fff8f3;
+            --text-color: #4b2e2e;
+            --card-bg: #fffdfb;
+            --accent: #f5a97f;
+            --highlight: #ec875d;
+        }
+
+        body.dark-mode {
+            --bg-color: #1e1e1e;
+            --text-color: #f4f4f4;
+            --card-bg: #2b2b2b;
+            --accent: #bb8566;
+            --highlight: #a05d3e;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        header {
+            background: linear-gradient(90deg, var(--accent), #fbc8a6);
+            padding: 40px 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            margin-top: 10px;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .buscador {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .buscador input {
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid #f3c7a5;
+            width: 90%;
+            max-width: 400px;
+            font-size: 1rem;
+            background: #fffdf9;
+        }
+
+        .categorias,
+        .modo {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .categorias button,
+        .modo button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            margin: 5px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .categorias button:hover,
+        .modo button:hover {
+            background-color: var(--highlight);
+        }
+
+        .receta {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .receta:hover {
+            transform: translateY(-4px);
+        }
+
+        .receta h2 {
+            margin-top: 0;
+            color: var(--highlight);
+        }
+
+        .receta .info,
+        .receta .nutricional {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: #9b5b3c;
+        }
+
+        .ingredientes,
+        .preparacion {
+            margin: 10px 0;
+        }
+
+        .ver-mas {
+            color: var(--highlight);
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .preparacion {
+            display: none;
+        }
+
+        .estrellas span {
+            font-size: 1.2rem;
+            color: #f08c5a;
+            cursor: pointer;
+        }
+
+        .acciones {
+            margin-top: 12px;
+        }
+
+        .acciones button {
+            background: none;
+            border: none;
+            color: var(--highlight);
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-right: 12px;
+            text-decoration: underline;
+        }
+
+        .volver {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .volver a {
+            padding: 12px 24px;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .acciones {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .acciones button {
+            padding: 8px 16px;
+            background-color: #f5a97f;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .acciones button:hover {
+            background-color: #e5723b;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Recetas Healthy</h1>
+        <p>Inspírate y cocina recetas sanas y fáciles</p>
+    </header>
+
+    <div class="container">
+        <div class="buscador">
+            <input type="text" placeholder="Buscar por ingrediente o nombre..." id="busqueda">
+        </div>
+
+        <div class="categorias">
+            <button data-categoria="todos">Todos</button>
+            <button data-categoria="plato">Platos</button>
+            <button data-categoria="vegano">Vegano</button>
+            <button data-categoria="postre">Postres</button>
+        </div>
+
+        <div class="modo">
+            <button onclick="document.body.classList.toggle('dark-mode')">🌙 Cambiar modo</button>
+        </div>
+
+        <!-- RECETA 1 -->
+        <div class="receta">
+            <h2>🥗 Ensalada Detox de Kale y Quinoa</h2>
+            <div class="info">Vegano - 15 min</div>
+            <div class="ingredientes"><strong>Ingredientes:</strong> 1 taza de kale, ½ taza de quinoa cocida, 1
+                zanahoria rallada, ½ aguacate, 1 cda de semillas de chía, jugo de limón.</div>
+            <div class="estrellas"><strong>Puntuación:</strong>
+                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+            </div>
+            <div class="ver-mas" onclick="togglePreparacion(this)">Ver preparación ↓</div>
+            <div class="preparacion">
+                1. Lava y masajea 1 taza de kale durante 2 minutos.<br>
+                2. Añade ½ taza de quinoa cocida.<br>
+                3. Incorpora 1 zanahoria rallada y ½ aguacate cortado.<br>
+                4. Agrega 1 cda de semillas de chía y un chorrito de jugo de limón.<br>
+                5. Mezcla bien y sirve fresco.
+            </div>
+            <div class="acciones">
+                <button onclick="imprimirReceta(this)">Imprimir</button>
+            </div>
+        </div>
+
+        <!-- RECETA 2 -->
+        <div class="receta">
+            <h2>🍛 Bowl de Salmón y Arroz Integral</h2>
+            <div class="info">Plato - 25 min</div>
+            <div class="ingredientes"><strong>Ingredientes:</strong> 150g de salmón, ¾ taza de arroz integral,
+                edamame,
+                pepino, aguacate, salsa de soja baja en sodio.</div>
+            <div class="estrellas"><strong>Puntuación:</strong>
+                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+            </div>
+            <div class="ver-mas" onclick="togglePreparacion(this)">Ver preparación ↓</div>
+            <div class="preparacion">
+                1. Cocina ¾ taza de arroz integral según las instrucciones.<br>
+                2. Cocina 150g de salmón a la plancha por 4-5 minutos por lado.<br>
+                3. Añade al bowl: arroz, edamame cocido, rodajas de pepino y aguacate.<br>
+                4. Corta el salmón en trozos y ponlo encima.<br>
+                5. Agrega salsa de soja baja en sodio al gusto.
+            </div>
+            <div class="acciones">
+                <button onclick="imprimirReceta(this)">Imprimir</button>
+            </div>
+        </div>
+
+        <!-- RECETA 3 -->
+        <div class="receta">
+            <h2>🍌 Muffins de Avena y Banana</h2>
+            <div class="info">Postre - 30 min</div>
+            <div class="ingredientes"><strong>Ingredientes:</strong> 2 bananas maduras, 1 taza de avena, 1 huevo, 1
+                cda
+                de miel, canela, polvo de hornear.</div>
+            <div class="estrellas"><strong>Puntuación:</strong>
+                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+            </div>
+            <div class="ver-mas" onclick="togglePreparacion(this)">Ver preparación ↓</div>
+            <div class="preparacion">
+                1. Tritura 2 bananas maduras en un bol.<br>
+                2. Agrega 1 taza de avena, 1 huevo, 1 cda de miel, ½ cdita de canela y ½ cdita de polvo de
+                hornear.<br>
+                3. Mezcla bien hasta formar una masa.<br>
+                4. Coloca en moldes de muffins y hornea a 180°C durante 20-25 minutos.
+            </div>
+            <div class="acciones">
+                <button onclick="imprimirReceta(this)">Imprimir</button>
+            </div>
+        </div>
+
+        <!-- RECETA 4 -->
+        <div class="receta">
+            <h2>🍵 Smoothie Verde Energizante</h2>
+            <div class="info">Vegano - 5 min</div>
+            <div class="ingredientes"><strong>Ingredientes:</strong> 1 taza de espinaca, 1 plátano, ½ taza de piña,
+                1
+                taza de agua de coco, 1 cdita de jengibre rallado.</div>
+            <div class="estrellas"><strong>Puntuación:</strong>
+                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+            </div>
+            <div class="ver-mas" onclick="togglePreparacion(this)">Ver preparación ↓</div>
+            <div class="preparacion">
+                1. Coloca en la licuadora: 1 taza de espinaca, 1 plátano, ½ taza de piña congelada, 1 taza de agua
+                de
+                coco y 1 cdita de jengibre.<br>
+                2. Licúa todo hasta obtener un batido cremoso.<br>
+                3. Sirve frío inmediatamente.
+            </div>
+            <div class="acciones">
+                <button onclick="imprimirReceta(this)">Imprimir</button>
+            </div>
+        </div>
+
+        <!-- RECETA 5 -->
+        <div class="receta">
+            <h2>🍲 Crema de Calabaza Light</h2>
+            <div class="info">Plato - 35 min</div>
+            <div class="ingredientes"><strong>Ingredientes:</strong> 500g de calabaza, 1 zanahoria, ½ cebolla, 1
+                papa
+                pequeña, agua, aceite de oliva, nuez moscada.</div>
+            <div class="estrellas"><strong>Puntuación:</strong>
+                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+            </div>
+            <div class="ver-mas" onclick="togglePreparacion(this)">Ver preparación ↓</div>
+            <div class="preparacion">
+                1. Pela y corta 500g de calabaza, 1 zanahoria, ½ cebolla y 1 papa pequeña.<br>
+                2. Sofríe la cebolla en 1 cda de aceite de oliva.<br>
+                3. Añade las verduras y cubre con agua. Cocina 25 min.<br>
+                4. Tritura todo y agrega una pizca de nuez moscada.<br>
+                5. Sirve caliente con un chorrito de aceite.
+            </div>
+            <div class="acciones">
+                <button onclick="imprimirReceta(this)">Imprimir</button>
+            </div>
+        </div>
+
+        <!-- RECETA 6 -->
+        <div class="receta">
+            <h2>🍓 Parfait de Yogur y Frutas</h2>
+            <div class="info">Postre - 10 min</div>
+            <div class="ingredientes"><strong>Ingredientes:</strong> 1 yogur natural sin azúcar, ½ taza de frutos
+                rojos,
+                2 cdas de granola sin azúcar, 1 cdita de semillas de lino.</div>
+            <div class="estrellas"><strong>Puntuación:</strong>
+                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+            </div>
+            <div class="ver-mas" onclick="togglePreparacion(this)">Ver preparación ↓</div>
+            <div class="preparacion">
+                1. En un vaso, coloca ½ yogur natural.<br>
+                2. Agrega ½ taza de frutos rojos (frescos o congelados).<br>
+                3. Añade 2 cdas de granola sin azúcar y 1 cdita de semillas de lino.<br>
+                4. Repite capas y sirve frío.
+            </div>
+            <div class="acciones">
+                <button onclick="imprimirReceta(this)">Imprimir</button>
+            </div>
+        </div>
+    </div> <!-- ¡Este cierre es el que faltaba! -->
+
+    <!-- Ahora va el botón, fuera de cualquier receta -->
+    <div style="text-align: center; margin: 40px 0;">
+        <a href="{% url 'index' %}"
+            style="padding: 12px 24px; background-color: #f5a97f; color: white; text-decoration: none; border-radius: 12px; font-size: 1rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            ← Volver al inicio
+        </a>
+    </div>
+
+    <script>
+        function togglePreparacion(element) {
+            const preparacion = element.nextElementSibling;
+            const visible = preparacion.style.display === 'block';
+            preparacion.style.display = visible ? 'none' : 'block';
+            element.textContent = visible ? 'Ver preparación ↓' : 'Ocultar preparación ↑';
+        }
+
+        function guardarFavorito(btn) {
+            alert("Receta guardada en favoritos (simulado).");
+        }
+
+        function imprimirReceta(btn) {
+            const receta = btn.closest(".receta");
+            const original = document.body.innerHTML;
+            document.body.innerHTML = receta.innerHTML;
+            window.print();
+            document.body.innerHTML = original;
+        }
+
+        function calificarEstrella(span) {
+            const estrellas = span.parentElement.querySelectorAll("span");
+            const index = [...estrellas].indexOf(span);
+            estrellas.forEach((s, i) => {
+                s.textContent = i <= index ? '★' : '☆';
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const botones = document.querySelectorAll(".categorias button");
+            const recetas = document.querySelectorAll(".receta");
+            const inputBusqueda = document.getElementById("busqueda");
+
+            botones.forEach(boton => {
+                boton.addEventListener("click", () => {
+                    const categoria = boton.dataset.categoria;
+                    recetas.forEach(receta => {
+                        const textoInfo = receta.querySelector(".info").textContent.toLowerCase();
+                        receta.style.display = (categoria === "todos" || textoInfo.includes(categoria)) ? "block" : "none";
+                    });
+                });
+            });
+
+            inputBusqueda.addEventListener("input", () => {
+                const texto = inputBusqueda.value.toLowerCase();
+                recetas.forEach(receta => {
+                    const titulo = receta.querySelector("h2").textContent.toLowerCase();
+                    const ingredientes = receta.querySelector(".ingredientes").textContent.toLowerCase();
+                    receta.style.display = (titulo.includes(texto) || ingredientes.includes(texto)) ? "block" : "none";
+                });
+            });
+
+            document.querySelectorAll(".estrellas span").forEach(span => {
+                span.addEventListener("click", () => calificarEstrella(span));
+            });
+        });
+    </script>
+</body>
+
+</html>
