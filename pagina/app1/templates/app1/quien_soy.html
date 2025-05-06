@@ -2,42 +2,62 @@
 {% block title %}Quién Soy{% endblock %}
 
 {% block content %}
-<div class="container text-center">
-    <h1 class="mb-4">Quién Soy</h1>
-    <p class="lead">
-        Soy <strong>Pierina</strong>, entrenadora personal certificada con una visión integral del bienestar físico,
-        emocional y mental. Mi enfoque se basa en el progreso constante, la motivación realista y la conexión contigo y
-        tus objetivos.
+<div class="container py-5 quien-soy">
+
+    <!-- Encabezado -->
+    <h1 class="text-center mb-4 fw-bold text-gradient">Pierina Gutiérrez</h1>
+    <p class="lead text-center mb-5 text-muted fs-5">
+        Entrenadora personal online con una misión clara: ayudarte a transformar tu cuerpo, tu energía y tu mentalidad
+        desde casa.
     </p>
 
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm h-100">
-                <img src="https://picsum.photos/400/300?random=2" class="card-img-top" alt="Pierina">
-                <div class="card-body text-start">
-                    <h3 class="card-title text-center">Pierina</h3>
-                    <p>Especialidades:</p>
-                    <ul class="list-unstyled ms-3">
-                        <li>✅ Entrenamientos dinámicos y desafiantes</li>
-                        <li>✅ Coaching motivacional y mentalidad positiva</li>
-                        <li>✅ Nutrición básica para acompañar el cambio físico</li>
-                        <li>✅ Programas adaptados para mujeres activas</li>
-                        <li>✅ Formación continua y cercanía real</li>
-                    </ul>
-                </div>
+    <!-- Bloque introductorio -->
+    <div class="bg-light rounded p-4 mb-5 shadow-sm">
+        <h3 class="fw-bold mb-3">¿Quién soy realmente?</h3>
+        <p>
+            Soy <strong>Pierina</strong>, tengo 25 años, formación certificada en entrenamiento personal y una gran
+            pasión por ayudar a mujeres reales a sentirse mejor con su cuerpo sin necesidad de gimnasio, dietas locas o
+            culpas.
+        </p>
+        <p>
+            Mi enfoque es directo, cercano y adaptado a ti. No creo en fórmulas mágicas, pero sí en la constancia, en
+            los cambios pequeños que suman y en la fuerza que todas tenemos (aunque a veces no la veamos).
+        </p>
+    </div>
+
+    <!-- Especialidades -->
+    <div class="mb-5">
+        <h3 class="fw-bold mb-4">💪 Lo que puedo hacer por ti</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-unstyled fs-6">
+                    <li>✅ Rutinas personalizadas según tu nivel y tiempo</li>
+                    <li>✅ Seguimiento semanal real, no automático</li>
+                    <li>✅ Coaching emocional para que no abandones</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-unstyled fs-6">
+                    <li>✅ Recomendaciones nutricionales que sí puedes seguir</li>
+                    <li>✅ Comunicación directa por WhatsApp</li>
+                    <li>✅ Motivación constante, sin presión innecesaria</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <div class="mt-5">
-        <h4>¿Qué me diferencia?</h4>
-        <ul class="list-unstyled mt-3">
-            <li>🎯 Sesiones 100% personalizadas y centradas en ti</li>
-            <li>💬 Comunicación continua, por WhatsApp o email</li>
-            <li>🤸‍♀️ Energía positiva y disciplina combinadas</li>
-            <li>📚 Educación constante para darte lo mejor</li>
-        </ul>
-        <a href="{% url 'contacto' %}" class="btn btn-primary mt-4">Reserva tu primera sesión</a>
+    <!-- Diferenciador -->
+    <div class="bg-warning bg-opacity-10 border-start border-warning ps-4 py-4 mb-5 rounded">
+        <h4 class="fw-bold">No te prometo magia. Te prometo acompañarte de verdad.</h4>
+        <p class="mb-0">Con empatía, claridad y compromiso. Como si entrenáramos juntas, aunque estemos lejos.</p>
     </div>
+
+    <!-- CTA final -->
+    <div class="text-center mt-5">
+        <h4 class="mb-3 fw-bold text-gradient">¿Estás lista para empezar tu cambio?</h4>
+        <p class="text-muted">Yo ya estoy lista para acompañarte. Cuando tú quieras, empezamos 💬</p>
+        <a href="{% url 'contacto' %}" class="btn btn-primary btn-lg px-4 mt-3">Entrena conmigo</a>
+    </div>
+
 </div>
 {% endblock %}
