@@ -1,16 +1,17 @@
 {% extends 'app1/base.html' %}
 {% block title %}Contacto{% endblock %}
+
 {% block content %}
-<div class="container">
+<div class="container py-5">
   <h1 class="mb-3">Contáctame</h1>
   <p>Rellena este formulario o escríbeme a <strong>pierinaagh7@gmail.com</strong></p>
 
-  {% if enviado %}
-  <div class="alert alert-success">✅ ¡Tu mensaje ha sido enviado con éxito!</div>
-  {% endif %}
+  <form action="https://formsubmit.co/pierinaagh7@gmail.com" method="POST">
+    <!-- Opciones extra -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_autoresponse" value="¡Gracias por tu mensaje! Te responderé pronto.">
 
-  <form method="post">
-    {% csrf_token %}
     <div class="mb-3">
       <label for="nombre" class="form-label">Nombre</label>
       <input type="text" class="form-control" name="nombre" id="nombre" required>
@@ -30,7 +31,8 @@
 
   <div class="text-center">
     <p>O escríbeme directamente por WhatsApp:</p>
-    <a href="https://wa.me/34600111222" class="btn btn-success" target="_blank">📱 Enviar WhatsApp</a>
+    <a href="https://wa.me/34666687198?text=Hola%20Pierina%2C%20me%20gustaría%20recibir%20información%20sobre%20tu%20entrenamiento%20online"
+      class="btn btn-success" target="_blank">📱 Enviar WhatsApp</a>
   </div>
 </div>
 {% endblock %}
