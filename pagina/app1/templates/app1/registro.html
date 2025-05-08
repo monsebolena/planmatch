@@ -1,0 +1,29 @@
+{% extends 'app1/base.html' %}
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 500px;">
+    <h2 class="text-center mb-4 text-primary">Crear una Cuenta</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <div class="form-text">{{ field.help_text|safe }}</div>
+            {% endif %}
+            {% for error in field.errors %}
+            <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+    </form>
+
+    <div class="text-center mt-4">
+        <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+    </div>
+</div>
+{% endblock %}

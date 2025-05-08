@@ -2,151 +2,106 @@
 :root {
     --color-primario: #007B8A;
     --color-primario-hover: #005f66;
-    --color-acento: #00c2b2;
+    --color-secundario: #00bfa6;
     --color-texto: #222;
     --color-texto-secundario: #666;
     --color-fondo: #f9f9f9;
     --color-blanco: #ffffff;
-    --color-borde: #e0e0e0;
+    --color-borde: #ddd;
 }
 
 /* === TIPOGRAFÍA GENERAL === */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--color-fondo);
     color: var(--color-texto);
     margin: 0;
     padding: 0;
-    line-height: 1.7;
-    font-size: 16px;
+    line-height: 1.6;
 }
 
 /* === NAVBAR === */
 .navbar {
-    background-color: var(--color-blanco);
     font-weight: 500;
     font-size: 16px;
-    padding: 12px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.navbar-brand img {
-    height: 48px;
-    margin-right: 10px;
-    transition: transform 0.3s ease;
-}
-
-.navbar-brand img:hover {
-    transform: scale(1.05);
+.navbar-brand {
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--color-primario);
 }
 
 .navbar-light .navbar-nav .nav-link {
     color: var(--color-texto);
-    margin-left: 20px;
-    transition: color 0.3s ease;
+    padding: 10px 15px;
+    transition: color 0.2s ease-in-out;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
     color: var(--color-primario);
 }
 
-/* === ENCABEZADOS === */
-.container h1,
-h2,
-h3 {
-    font-weight: 700;
-    color: var(--color-primario);
-    margin-bottom: 1rem;
-}
-
-h1 {
-    font-size: 2.4rem;
-}
-
-h2 {
-    font-size: 1.8rem;
-}
-
-h3 {
-    font-size: 1.4rem;
-}
-
 /* === BOTONES === */
 .btn-primary {
     background-color: var(--color-primario);
     border: none;
-    color: var(--color-blanco);
-    padding: 10px 28px;
     font-weight: 500;
-    border-radius: 30px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
     background-color: var(--color-primario-hover);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .btn-outline-secondary {
-    border: 2px solid var(--color-primario);
+    border-color: var(--color-primario);
     color: var(--color-primario);
-    border-radius: 30px;
-    padding: 10px 24px;
-    font-weight: 500;
 }
 
 .btn-outline-secondary:hover {
     background-color: var(--color-primario);
-    color: var(--color-blanco);
+    color: white;
 }
 
-/* === CONTENIDO === */
-.lead {
-    font-size: 1.2rem;
-    color: var(--color-texto-secundario);
-    max-width: 800px;
-    margin: 0 auto 2rem;
-    line-height: 1.8;
+/* === FORMULARIOS === */
+form {
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
+    padding: 20px;
+    border-radius: 8px;
 }
 
-.container p {
-    color: var(--color-texto-secundario);
-    margin-bottom: 1.2rem;
-}
-
-/* === LISTAS DESTACADAS === */
-ul {
-    padding-left: 1.5rem;
-}
-
-ul li {
-    margin-bottom: 0.75rem;
+form label {
     font-weight: 500;
-    color: var(--color-texto);
+    margin-bottom: 5px;
 }
 
-/* === BLOQUES DECORADOS === */
-.block-highlight {
-    background-color: var(--color-blanco);
-    border-left: 4px solid var(--color-primario);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    border-radius: 6px;
+form input,
+form textarea {
+    border-radius: 5px;
+    border: 1px solid var(--color-borde);
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 100%;
 }
 
-/* === TESTIMONIOS === */
-.testimonio {
-    background-color: var(--color-blanco);
-    border-left: 5px solid var(--color-acento);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    font-style: italic;
-    color: #444;
+/* === TÍTULOS Y TEXTOS === */
+h1,
+h2,
+h3,
+h4 {
+    color: var(--color-primario);
+    font-weight: 700;
 }
 
-/* === PIE DE PÁGINA === */
+.lead {
+    color: var(--color-texto-secundario);
+}
+
+/* === FOOTER === */
 footer {
     background-color: var(--color-blanco);
     text-align: center;
@@ -156,23 +111,13 @@ footer {
     border-top: 1px solid var(--color-borde);
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 576px) {
-    h1 {
-        font-size: 1.7rem;
-    }
+/* === UTILIDADES === */
+.card {
+    border: 1px solid var(--color-borde);
+    border-radius: 10px;
+    transition: box-shadow 0.2s ease;
+}
 
-    h2 {
-        font-size: 1.4rem;
-    }
-
-    .btn-primary,
-    .btn-outline-secondary {
-        padding: 8px 20px;
-        font-size: 0.95rem;
-    }
-
-    .navbar-nav .nav-link {
-        margin-left: 12px;
-    }
+.card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
 }

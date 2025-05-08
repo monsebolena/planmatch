@@ -21,9 +21,15 @@ from app1 import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='inicio'),
-    path('el-centro/', views.el_centro, name='el_centro'),
-    path('quien-soy/', views.quien_soy, name='quien_soy'),
-    path('servicios/', views.servicios, name='servicios'),
-    path('contacto/', views.contacto, name='contacto'),
-    path('comprar/', views.comprar, name='comprar'),
+    path('registro/', views.registro, name='registro'),
+    path('login/', views.login_view, name='login'),
+    path('panel/', views.panel, name='panel'),
+    path('crear_plan/', views.crear_plan, name='crear_plan'),
+    path('logout/', views.logout_view, name='logout'),
+    path('plan/editar/<int:plan_id>/', views.editar_plan, name='editar_plan'),
+    path('plan/eliminar/<int:plan_id>/', views.eliminar_plan, name='eliminar_plan'),
+
+
+
+
 ]
