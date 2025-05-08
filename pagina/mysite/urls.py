@@ -28,6 +28,10 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('plan/editar/<int:plan_id>/', views.editar_plan, name='editar_plan'),
     path('plan/eliminar/<int:plan_id>/', views.eliminar_plan, name='eliminar_plan'),
+    path('apuntarse/<int:plan_id>/', views.apuntarse_plan, name='apuntarse_plan'),
+
+
+
 
 
 

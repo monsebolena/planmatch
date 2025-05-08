@@ -4,6 +4,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import PlanForm
 from .models import Plan  # ¡IMPORTANTE!
+from django.contrib import messages
+from django.shortcuts import get_object_or_404
+from .models import Plan
+from django.db import models
+
 
 # Página de inicio
 def index(request):
@@ -100,3 +105,33 @@ def eliminar_plan(request, plan_id):
         plan.delete()
         return redirect('panel')
     return render(request, 'app1/eliminar_plan.html', {'plan': plan})
+
+@login_required
+def apuntarse_plan(request, plan_id):
+    plan = get_object_or_404(Plan, id=plan_id)
+
+    if request.user in plan.participantes.all():
+        messages.warning(request, "Ya estás apuntado a este plan.")
+    elif plan.participantes.count() >= plan.capacidad_maxima:
+        messages.error(request, "Este plan ya está completo.")
+    else:
+        plan.participantes.add(request.user)
+        messages.success(request, "Te has apuntado correctamente al plan.")
+
+    return redirect('panel')  # o redirige a una vista de detalle si lo prefieres
+
+@login_required
+def panel(request):
+    usuario = request.user
+    planes_creados = Plan.objects.filter(creador=usuario)
+    planes_apuntado = Plan.objects.filter(participantes=usuario)
+    # Planes disponibles donde NO soy creador, no estoy apuntado y hay plazas disponibles
+    planes_disponibles = Plan.objects.exclude(creador=usuario).exclude(participantes=usuario).filter(participantes__lt=models.F('capacidad_maxima'))
+
+    return render(request, 'app1/panel.html', {
+        'planes_creados': planes_creados,
+        'planes_apuntado': planes_apuntado,
+        'planes_disponibles': planes_disponibles,
+    })
+
+
